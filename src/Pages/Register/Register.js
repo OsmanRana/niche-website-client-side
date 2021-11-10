@@ -15,7 +15,6 @@ const Register = () => {
         const newLoginData = { ...loginData }
         newLoginData[field] = value;
         setLoginData(newLoginData)
-        console.log(newLoginData)
     };
     const handleRegisterSubmit = e => {
         if (loginData.password !== loginData.password2) {

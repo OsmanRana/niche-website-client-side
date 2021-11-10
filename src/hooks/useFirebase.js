@@ -6,7 +6,10 @@ initializeAuthentication();
 const useFirebase = () => {
     const [user, setUser] = useState([]);
     const [authError, setAuthError] = useState('');
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true);
+    const [admin, setAdmin] = useState(false);
+
+
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
 
@@ -24,6 +27,7 @@ const useFirebase = () => {
                 }).then(() => {
                 }).catch((error) => {
                 });
+                saveUser(email, name, 'POST');
                 history.replace('/');
             })
             .catch((error) => {
@@ -50,7 +54,9 @@ const useFirebase = () => {
         setIsLoading(true);
         signInWithPopup(auth, provider)
             .then((result) => {
+                const user = result.user;
                 setAuthError('');
+                saveUser(user.email, user.displayName, 'PUT');
                 history.replace('/');
             }).catch((error) => {
                 setAuthError(error.message)
@@ -71,6 +77,14 @@ const useFirebase = () => {
         return () => unsubscribed;
     }, [auth])
 
+    //check admin
+    useEffect(() => {
+        fetch(`http://localhost:5000/users/${user?.email}`)
+            .then(res => res.json())
+            .then(data => setAdmin(data.admin))
+
+    }, [user?.email])
+
     //Logout User
     const logOut = () => {
         setIsLoading(true);
@@ -83,9 +97,25 @@ const useFirebase = () => {
             .finally(() => setIsLoading(false));
     };
 
+    const saveUser = (email, displayName, method) => {
+        const user = { email, displayName };
+        fetch('http://localhost:5000/users', {
+            method: method,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+
+            })
+    };
+
 
     return {
         user,
+        admin,
         authError,
         isLoading,
         newUserRegistration,

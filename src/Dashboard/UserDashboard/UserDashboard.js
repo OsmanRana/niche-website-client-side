@@ -30,13 +30,14 @@ import MyOrders from './MyOrders';
 import Review from './Review';
 import Logout from './Logout';
 import DashboardHome from './DashboardHome';
+import MakeAdmin from '../AdminDashboard/MakeAdmin';
 
 const drawerWidth = 240;
 
 const UserDashboard = (props) => {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const { user } = useAuth();
+    const { user, admin } = useAuth();
 
     let { path, url } = useRouteMatch();
 
@@ -49,69 +50,90 @@ const UserDashboard = (props) => {
             <Toolbar />
             <Divider />
             <List>
-                <NavLink to="/" style={{ textDecoration: 'none' }} >
-                    <ListItem>
-                        <ListItemIcon>
-                            <HomeIcon />
-                        </ListItemIcon>
-                        <ListItemText>Home</ListItemText>
-                    </ListItem>
-                </NavLink>
-                <NavLink to={`${url}`} style={{ textDecoration: 'none' }} activeStyle={{
-                    fontWeight: "bold",
-                    color: "red"
-                }}>
-                    <ListItem>
-                        <ListItemIcon>
-                            <DashboardIcon />
-                        </ListItemIcon>
-                        <ListItemText>Dashboard</ListItemText>
-                    </ListItem>
-                </NavLink>
-                <NavLink to={`${url}/myOrders`} style={{ textDecoration: 'none' }} activeStyle={{
-                    fontWeight: "bold",
-                    color: "red"
-                }}>
-                    <ListItem>
-                        <ListItemIcon>
-                            <ShoppingCartIcon />
-                        </ListItemIcon>
-                        <ListItemText>My Orders</ListItemText>
-                    </ListItem>
-                </NavLink>
-                <NavLink to={`${url}/pay`} style={{ textDecoration: 'none' }} activeStyle={{
-                    fontWeight: "bold",
-                    color: "red"
-                }}>
-                    <ListItem>
-                        <ListItemIcon>
-                            <PaymentIcon />
-                        </ListItemIcon>
-                        <ListItemText>Payment</ListItemText>
-                    </ListItem>
-                </NavLink>
-                <NavLink to={`${url}/review`} style={{ textDecoration: 'none' }} activeStyle={{
-                    fontWeight: "bold",
-                    color: "red"
-                }}>
-                    <ListItem>
-                        <ListItemIcon>
-                            <RateReviewIcon />
-                        </ListItemIcon>
-                        <ListItemText>Review</ListItemText>
-                    </ListItem>
-                </NavLink>
-                <NavLink to={`${url}/logout`} style={{ textDecoration: 'none' }} activeStyle={{
-                    fontWeight: "bold",
-                    color: "red"
-                }}>
-                    <ListItem>
-                        <ListItemIcon>
-                            <LogoutIcon />
-                        </ListItemIcon>
-                        <ListItemText>Log Out</ListItemText>
-                    </ListItem>
-                </NavLink>
+                {
+                    !admin && <Box>
+                        <NavLink to="/" style={{ textDecoration: 'none' }} >
+                            <ListItem>
+                                <ListItemIcon>
+                                    <HomeIcon />
+                                </ListItemIcon>
+                                <ListItemText>Home</ListItemText>
+                            </ListItem>
+                        </NavLink>
+                        <NavLink to={`${url}`} style={{ textDecoration: 'none' }} activeStyle={{
+                            fontWeight: "bold",
+                            color: "red"
+                        }}>
+                            <ListItem>
+                                <ListItemIcon>
+                                    <DashboardIcon />
+                                </ListItemIcon>
+                                <ListItemText>Dashboard</ListItemText>
+                            </ListItem>
+                        </NavLink>
+                        <NavLink to={`${url}/myOrders`} style={{ textDecoration: 'none' }} activeStyle={{
+                            fontWeight: "bold",
+                            color: "red"
+                        }}>
+                            <ListItem>
+                                <ListItemIcon>
+                                    <ShoppingCartIcon />
+                                </ListItemIcon>
+                                <ListItemText>My Orders</ListItemText>
+                            </ListItem>
+                        </NavLink>
+                        <NavLink to={`${url}/pay`} style={{ textDecoration: 'none' }} activeStyle={{
+                            fontWeight: "bold",
+                            color: "red"
+                        }}>
+                            <ListItem>
+                                <ListItemIcon>
+                                    <PaymentIcon />
+                                </ListItemIcon>
+                                <ListItemText>Payment</ListItemText>
+                            </ListItem>
+                        </NavLink>
+                        <NavLink to={`${url}/review`} style={{ textDecoration: 'none' }} activeStyle={{
+                            fontWeight: "bold",
+                            color: "red"
+                        }}>
+                            <ListItem>
+                                <ListItemIcon>
+                                    <RateReviewIcon />
+                                </ListItemIcon>
+                                <ListItemText>Review</ListItemText>
+                            </ListItem>
+                        </NavLink>
+                        <NavLink to={`${url}/logout`} style={{ textDecoration: 'none' }} activeStyle={{
+                            fontWeight: "bold",
+                            color: "red"
+                        }}>
+                            <ListItem>
+                                <ListItemIcon>
+                                    <LogoutIcon />
+                                </ListItemIcon>
+                                <ListItemText>Log Out</ListItemText>
+                            </ListItem>
+                        </NavLink>
+                    </Box>
+                }
+
+                {
+                    admin && <Box>
+                        <NavLink to={`${url}/makeAdmin`} style={{ textDecoration: 'none' }} activeStyle={{
+                            fontWeight: "bold",
+                            color: "red"
+                        }}>
+                            <ListItem>
+                                <ListItemIcon>
+                                    <LogoutIcon />
+                                </ListItemIcon>
+                                <ListItemText>Make an Admin</ListItemText>
+                            </ListItem>
+                        </NavLink>
+                    </Box>
+                }
+
             </List>
 
         </div>
@@ -195,6 +217,9 @@ const UserDashboard = (props) => {
                     </Route>
                     <Route path={`${path}/logout`}>
                         <Logout></Logout>
+                    </Route>
+                    <Route path={`${path}/makeAdmin`}>
+                        <MakeAdmin></MakeAdmin>
                     </Route>
                 </Switch>
             </Box>
