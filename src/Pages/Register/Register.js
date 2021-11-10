@@ -1,30 +1,46 @@
 import { Button, Container, Grid, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import useAuth from '../../hooks/useAuth';
 
 const Register = () => {
-    const handleOnSubmit = e => {
+    const [loginData, setLoginData] = useState({});
+    const {newUserRegistration} = useAuth();
+
+    const handleOnBlur = e => {
+        const field = e.target.name;
+        const value = e.target.value;
+        const newLoginData = { ...loginData }
+        newLoginData[field] = value;
+        setLoginData(newLoginData)
+    };
+    const handleRegisterSubmit = e => {
+        if (loginData.password !== loginData.password2) {
+            alert('Your password did not matched')
+        }
+        newUserRegistration(loginData.email, loginData.password)
         e.preventDefault();
     }
     return (
         <Container sx={{ p: 0 }}>
             <Typography sx={{ color: 'text.secondary', mt: 5, mb: 3 }} variant="h6" gutterBottom component="div">REGISTER</Typography>
             <form
-                onSubmit={handleOnSubmit}
+                onSubmit={handleRegisterSubmit}
             >
                 <Grid container>
-                    <Grid xs={1} md={2}>
+                    <Grid item xs={1} md={2}>
 
                     </Grid>
-                    <Grid xs={10} md={8}>
+                    <Grid item xs={10} md={8}>
                         <TextField
                             sx={{ width: 1 }}
                             id="outlined-basic-name"
                             label="Your Full Name Please"
                             name="name"
                             type="name"
+                            onBlur={handleOnBlur}
+                            required
                             variant="outlined" />
                         <TextField
                             sx={{ width: 1, mt: 3 }}
@@ -32,6 +48,8 @@ const Register = () => {
                             label="Your Email Please"
                             name="email"
                             type="email"
+                            onBlur={handleOnBlur}
+                            required
                             variant="outlined" />
                         <TextField
                             sx={{ width: 1, my: 3 }}
@@ -39,9 +57,20 @@ const Register = () => {
                             label="Your Password Please"
                             name="password"
                             type="password"
+                            onBlur={handleOnBlur}
+                            required
+                            variant="outlined" />
+                        <TextField
+                            sx={{ width: 1, my: 3 }}
+                            id="outlined-basic-password2"
+                            label="Confirm password please"
+                            name="password2"
+                            type="password"
+                            onBlur={handleOnBlur}
+                            required
                             variant="outlined" />
                     </Grid>
-                    <Grid xs={1} md={2} sx={{ pl: 0 }}>
+                    <Grid item xs={1} md={2} sx={{ pl: 0 }}>
 
                     </Grid>
 
