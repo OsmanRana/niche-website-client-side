@@ -13,7 +13,7 @@ import useAuth from '../../../hooks/useAuth';
 const Navigation = () => {
     const { user, logOut } = useAuth();
     console.log(user)
-    const handleLogOut = () =>{
+    const handleLogOut = () => {
         logOut();
     };
     return (
@@ -35,6 +35,9 @@ const Navigation = () => {
                         </Typography>
                         {
                             user?.email && <Typography>{user.displayName}</Typography>
+                        }
+                        {
+                            user?.email && <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/userDashboard"><Button color="inherit">Dashboard</Button></NavLink>
                         }
                         {
                             user?.email ? <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/login"><Button onClick={handleLogOut} color="inherit">Logout</Button></NavLink>
