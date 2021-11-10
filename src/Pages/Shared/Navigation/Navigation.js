@@ -7,9 +7,15 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Container } from '@mui/material';
-import {  NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 
 const Navigation = () => {
+    const { user, logOut } = useAuth();
+    console.log(user)
+    const handleLogOut = () =>{
+        logOut();
+    };
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
@@ -27,7 +33,15 @@ const Navigation = () => {
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                             News
                         </Typography>
-                        <NavLink style={{textDecoration: 'none', color: 'white'}} to="/login"><Button color="inherit">Login</Button></NavLink>
+                        {
+                            user?.email && <Typography>{user.displayName}</Typography>
+                        }
+                        {
+                            user?.email ? <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/login"><Button onClick={handleLogOut} color="inherit">Logout</Button></NavLink>
+                                :
+                                <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/login"><Button color="inherit">Login</Button></NavLink>
+                        }
+
                     </Toolbar>
                 </Container>
             </AppBar>

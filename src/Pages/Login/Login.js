@@ -1,10 +1,13 @@
-import { Button, Container, Grid, Typography } from '@mui/material';
+import { Alert, Button, CircularProgress, Container, Grid, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
+import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({});
+    const { loginUser, isLoading, authError, user, handleGoogleSignIn } = useAuth();
+    const history = useHistory()
 
     const handleOnBlur = e => {
         const field = e.target.name;
@@ -15,19 +18,26 @@ const Login = () => {
     };
 
     const handleLoginSubmit = e => {
+        loginUser(loginData.email, loginData.password)
         e.preventDefault();
-    }
+    };
+
+    const googleSignIn =()=>{
+        handleGoogleSignIn(history);
+    };
     return (
         <Container sx={{ p: 0 }}>
             <Typography sx={{ color: 'text.secondary', mt: 5, mb: 3 }} variant="h6" gutterBottom component="div">LOGIN</Typography>
+
             <form
                 onSubmit={handleLoginSubmit}
             >
+
                 <Grid container>
                     <Grid item xs={1} md={2}>
 
                     </Grid>
-                    <Grid item xs={10} md={8}>
+                    <Grid item xs={10} md={8} sx={{ my: 'auto', boxShadow: 1, p: 4, borderRadius: 5 }}>
                         <TextField
                             sx={{ width: 1 }}
                             id="outlined-basic-email"
@@ -47,14 +57,38 @@ const Login = () => {
                             onBlur={handleOnBlur}
                             required
                             variant="outlined" />
+                        {
+                            isLoading && <CircularProgress />
+                        }
+                        {
+                            authError && <Alert severity="error">{authError}</Alert>
+                        }
+                        {
+                            user?.email && <Alert severity="success">Login successfully!</Alert>
+                        }
                     </Grid>
                     <Grid item xs={1} md={2} sx={{ pl: 0 }}>
 
                     </Grid>
                 </Grid>
-                <Button type="submit" variant="contained" >Login</Button>
+
+                <Button sx={{ mt: 3 }} type="submit" variant="contained" >Login</Button>
             </form>
-            <NavLink to="/register" style={{ textDecoration: 'none' }}><Typography sx={{ color: 'info.main', textAlign: 'center', my: 3 }} variant="h6" gutterBottom component="div">NEW USER? PLEASE REGISTER</Typography></NavLink>
+            
+            <Grid container>
+                <Grid item md={2} sx={{ pl: 0 }}>
+
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <NavLink to="/register" style={{ textDecoration: 'none' }}><Button sx={{ color: 'info.main', textAlign: 'center', my: 3, boxShadow: 1, px: 5, py:3, borderRadius: 5 }}>NEW USER? PLEASE REGISTER</Button></NavLink>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <Button onClick={googleSignIn} sx={{ my: 3, boxShadow: 1, px: 10, py:3, borderRadius: 5 }} variant="text">Google Login</Button>
+                </Grid>
+                <Grid item md={2} sx={{ pl: 0 }}>
+
+                </Grid>
+            </Grid>
         </Container>
     );
 };
