@@ -15,28 +15,29 @@ import Typography from '@mui/material/Typography';
 import useAuth from '../../hooks/useAuth'
 import { NavLink } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import PaymentIcon from '@mui/icons-material/Payment';
-import RateReviewIcon from '@mui/icons-material/RateReview';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {
     Switch,
     Route,
     useRouteMatch
 } from "react-router-dom";
-import Pay from './Pay';
-import MyOrders from './MyOrders';
-import Review from './Review';
-import Logout from './Logout';
-import DashboardHome from './DashboardHome';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import MakeAdmin from '../AdminDashboard/MakeAdmin';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import AddIcon from '@mui/icons-material/Add';
+import SettingsIcon from '@mui/icons-material/Settings';
+import ManageAllOrders from '../AdminDashboard/ManageAllOrders';
+import AddProduct from '../AdminDashboard/AddProduct';
+import ManageAllProducts from '../AdminDashboard/ManageAllProducts';
+import DashboardHome from '../UserDashboard/DashboardHome';
+import Logout from '../UserDashboard/Logout';
 
 const drawerWidth = 240;
 
 const UserDashboard = (props) => {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const { user } = useAuth();
+    const { user} = useAuth();
 
     let { path, url } = useRouteMatch();
 
@@ -68,37 +69,48 @@ const UserDashboard = (props) => {
                         <ListItemText>Dashboard</ListItemText>
                     </ListItem>
                 </NavLink>
-                <NavLink to={`${url}/myOrders`} style={{ textDecoration: 'none' }} activeStyle={{
+                <NavLink to={`${url}/manageAllOrders`} style={{ textDecoration: 'none' }} activeStyle={{
                     fontWeight: "bold",
                     color: "red"
                 }}>
                     <ListItem>
                         <ListItemIcon>
-                            <ShoppingCartIcon />
+                            <SettingsIcon />
                         </ListItemIcon>
-                        <ListItemText>My Orders</ListItemText>
+                        <ListItemText>Manage All Orders</ListItemText>
                     </ListItem>
                 </NavLink>
-                <NavLink to={`${url}/pay`} style={{ textDecoration: 'none' }} activeStyle={{
+                <NavLink to={`${url}/addProduct`} style={{ textDecoration: 'none' }} activeStyle={{
                     fontWeight: "bold",
                     color: "red"
                 }}>
                     <ListItem>
                         <ListItemIcon>
-                            <PaymentIcon />
+                            <AddIcon />
                         </ListItemIcon>
-                        <ListItemText>Payment</ListItemText>
+                        <ListItemText>Add a Product</ListItemText>
                     </ListItem>
                 </NavLink>
-                <NavLink to={`${url}/review`} style={{ textDecoration: 'none' }} activeStyle={{
+                <NavLink to={`${url}/makeAdmin`} style={{ textDecoration: 'none' }} activeStyle={{
                     fontWeight: "bold",
                     color: "red"
                 }}>
                     <ListItem>
                         <ListItemIcon>
-                            <RateReviewIcon />
+                            < AdminPanelSettingsIcon />
                         </ListItemIcon>
-                        <ListItemText>Review</ListItemText>
+                        <ListItemText>Make an Admin</ListItemText>
+                    </ListItem>
+                </NavLink>
+                <NavLink to={`${url}/manageAllProducts`} style={{ textDecoration: 'none' }} activeStyle={{
+                    fontWeight: "bold",
+                    color: "red"
+                }}>
+                    <ListItem>
+                        <ListItemIcon>
+                            <SettingsIcon />
+                        </ListItemIcon>
+                        <ListItemText>Manage Products</ListItemText>
                     </ListItem>
                 </NavLink>
                 <NavLink to={`${url}/logout`} style={{ textDecoration: 'none' }} activeStyle={{
@@ -113,8 +125,7 @@ const UserDashboard = (props) => {
                     </ListItem>
                 </NavLink>
             </List>
-
-        </div>
+        </div >
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;
@@ -184,21 +195,23 @@ const UserDashboard = (props) => {
                     <Route exact path={path}>
                         <DashboardHome></DashboardHome>
                     </Route>
-                    {/* User routes */}
-                    <Route path={`${path}/pay`}>
-                        <Pay></Pay>
+
+                    {/* Admin Routes */}
+                    <Route path={`${path}/manageAllOrders`}>
+                        <ManageAllOrders></ManageAllOrders>
                     </Route>
-                    <Route path={`${path}/myOrders`}>
-                        <MyOrders></MyOrders>
+                    <Route path={`${path}/addProduct`}>
+                        <AddProduct></AddProduct>
                     </Route>
-                    <Route path={`${path}/review`}>
-                        <Review></Review>
+                    <Route path={`${path}/makeAdmin`}>
+                        <MakeAdmin></MakeAdmin>
+                    </Route>
+                    <Route path={`${path}/manageAllProducts`}>
+                        <ManageAllProducts></ManageAllProducts>
                     </Route>
                     <Route path={`${path}/logout`}>
                         <Logout></Logout>
                     </Route>
-
-
                 </Switch>
             </Box>
         </Box>

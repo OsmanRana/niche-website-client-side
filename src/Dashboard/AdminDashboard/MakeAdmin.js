@@ -21,6 +21,10 @@ const MakeAdmin = () => {
                 if (data.modifiedCount) {
                     setSuccess(true)
                 }
+                else{
+                    alert('This user does not exist, please add a valid users email. Thanks')
+                    setEmail('')
+                }
             })
         e.preventDefault();
     };

@@ -2,10 +2,13 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import AuthProvider from './Contexts/AuthProvider';
+import AdminDashboard from './Dashboard/AdminDashboard/AdminDashboard';
 import UserDashboard from './Dashboard/UserDashboard/UserDashboard';
+import Explore from './Pages/Explore/Explore';
 import Home from './Pages/Home/Home/Home';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
+
 
 function App() {
   return (
@@ -21,6 +24,9 @@ function App() {
               <Home>
               </Home>
             </Route>
+            <Route path="/explore">
+              <Explore></Explore>
+            </Route>
             <Route path="/login">
               <Login>
               </Login>
@@ -31,7 +37,11 @@ function App() {
             <Route path="/userDashboard">
               <UserDashboard></UserDashboard>
             </Route>
+            <Route path="/adminDashboard">
+              <AdminDashboard></AdminDashboard>
+            </Route>
           </Switch>
+          {/* <Footer></Footer> */}
         </Router>
       </AuthProvider>
     </div>
