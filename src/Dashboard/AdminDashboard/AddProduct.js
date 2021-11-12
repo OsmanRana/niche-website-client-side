@@ -19,7 +19,6 @@ const AddProduct = () => {
                     alert('Product added successfully')
                     reset();
                 }
-                console.log(data)
             })
 
     };

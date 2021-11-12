@@ -1,12 +1,20 @@
-import { Card, CardActionArea, CardContent, CardMedia, CircularProgress, Container, Grid, Typography } from '@mui/material';
+import { Button, Card, CardActionArea, CardContent, CardMedia, CircularProgress, Container, Grid, Typography, Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useForm } from 'react-hook-form';
+import { useHistory, useParams } from 'react-router';
 import Navigation from '../Shared/Navigation/Navigation';
+import '../../Dashboard/AdminDashboard/AddProduct.css'
+import useAuth from '../../hooks/useAuth';
 
 const PurchasePage = () => {
     const [product, setProduct] = useState([]);
-    console.log(product)
+    const { register, handleSubmit } = useForm();
+    const history = useHistory();
+
     const { id } = useParams();
+    const { user } = useAuth();
+
+    //get product
     useEffect(() => {
         fetch(`https://mighty-bastion-98054.herokuapp.com/products/${id}`)
             .then(res => res.json())
@@ -14,6 +22,28 @@ const PurchasePage = () => {
     }, [id]);
 
     const { productName, description, image, price } = product;
+    const { displayName, email } = user;
+
+//send order
+    const onSubmit = data => {
+        const status = 'Pending'
+        data.orderStatus = status;
+        fetch ('http://localhost:5000/orders', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res=>res.json())
+        .then(data=> {
+            if(data.insertedId){
+                alert('Order placed successfully')
+                history.push('/')
+            }
+        })
+    };
+
 
     return (
         <>
@@ -47,6 +77,24 @@ const PurchasePage = () => {
                                 </CardContent>
                             </CardActionArea>
                         </Card>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <Box sx={{ borderRadius: 5, mb: 3, boxShadow: 3 }}>
+                            <Typography sx={{ color: 'info.main', py: 3 }} variant="h3" gutterBottom component="div">
+                                Place Order
+                            </Typography>
+                        </Box>
+                        <form className="addProduct" onSubmit={handleSubmit(onSubmit)}>
+                            <input defaultValue={productName} readOnly  {...register("productName", { required: true })} />
+                            <input defaultValue={price} readOnly type="number" {...register("price", { required: true })} />
+                            <input defaultValue="1" type="number" {...register("quantity", { min: 1, required: true })} />
+                            <input defaultValue={displayName}   {...register("customerName", { required: true })} />
+                            <input defaultValue={email} readOnly {...register("email", { required: true })} />
+                            <input placeholder="Phone Number Please" type="number" {...register("phone", { required: true })} />
+                            <textarea placeholder="Shipping Address"  {...register("address", { required: true })} />
+
+                            <Button type="submit" sx={{ width: "90%" }} variant="contained">Confirm Order</Button>
+                        </form>
                     </Grid>
 
                 </Grid>
