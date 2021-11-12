@@ -48,7 +48,6 @@ const AddProduct = () => {
 
                 </Grid>
             </Grid>
-
         </Container>
     );
 };

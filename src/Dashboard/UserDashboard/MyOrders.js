@@ -29,7 +29,7 @@ const MyOrders = () => {
     const [orders, setOrders] = useState([]);
     const { user } = useAuth();
     useEffect(() => {
-        const url = `http://localhost:5000/orders/order?email=${user?.email}`
+        const url = `https://mighty-bastion-98054.herokuapp.com/orders/order?email=${user?.email}`
         fetch(url)
             .then(res => res.json())
             .then(data => setOrders(data))
@@ -58,7 +58,7 @@ const MyOrders = () => {
         <Container>
             <Box sx={{ borderRadius: 5, my: 3, boxShadow: 3 }}>
                 <Typography sx={{ color: 'info.main', py: 3 }} variant="h3" gutterBottom component="div">
-                    Manage all Orders: {orders?.length}
+                    {user?.displayName}'s  Orders: {orders?.length}
                 </Typography>
             </Box>
             <TableContainer component={Paper}>
@@ -66,10 +66,10 @@ const MyOrders = () => {
                     <TableHead>
                         <TableRow>
                             <StyledTableCell align="left">Product Name</StyledTableCell>
-                            <StyledTableCell align="left">Customer Name</StyledTableCell>
-                            <StyledTableCell align="left">Customer Email</StyledTableCell>
-                            <StyledTableCell align="left">Customer Phone</StyledTableCell>
-                            <StyledTableCell align="left">Customer Address</StyledTableCell>
+                            <StyledTableCell align="left">Name</StyledTableCell>
+                            <StyledTableCell align="left">Email</StyledTableCell>
+                            <StyledTableCell align="left">Phone</StyledTableCell>
+                            <StyledTableCell align="left">Address</StyledTableCell>
                             <StyledTableCell align="left">Quantity Ordered</StyledTableCell>
                             <StyledTableCell align="left">Total to Pay</StyledTableCell>
                             <StyledTableCell align="left">Cancel Order</StyledTableCell>
