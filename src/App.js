@@ -7,7 +7,9 @@ import UserDashboard from './Dashboard/UserDashboard/UserDashboard';
 import Explore from './Pages/Explore/Explore';
 import Home from './Pages/Home/Home/Home';
 import Login from './Pages/Login/Login';
+import PurchasePage from './Pages/Purchase/PurchasePage';
 import Register from './Pages/Register/Register';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
 
 
 function App() {
@@ -21,9 +23,11 @@ function App() {
               </Home>
             </Route>
             <Route exact path="/home">
-              <Home>
-              </Home>
+              <Home></Home>
             </Route>
+            <PrivateRoute path="/purchasePage/:id">
+              <PurchasePage></PurchasePage>
+            </PrivateRoute>
             <Route path="/explore">
               <Explore></Explore>
             </Route>

@@ -1,13 +1,14 @@
 import { Alert, Button, CircularProgress, Container, Grid, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({});
     const { loginUser, isLoading, authError, user, handleGoogleSignIn } = useAuth();
-    const history = useHistory()
+    const location = useLocation();
+    const history = useHistory();
 
     const handleOnBlur = e => {
         const field = e.target.name;
@@ -18,12 +19,12 @@ const Login = () => {
     };
 
     const handleLoginSubmit = e => {
-        loginUser(loginData.email, loginData.password)
+        loginUser(loginData.email, loginData.password, location, history)
         e.preventDefault();
     };
 
-    const googleSignIn =()=>{
-        handleGoogleSignIn(history);
+    const googleSignIn = () => {
+        handleGoogleSignIn(location, history);
     };
     return (
         <Container sx={{ p: 0 }}>
@@ -74,16 +75,16 @@ const Login = () => {
 
                 <Button sx={{ mt: 3 }} type="submit" variant="contained" >Login</Button>
             </form>
-            
+
             <Grid container>
                 <Grid item md={2} sx={{ pl: 0 }}>
 
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <NavLink to="/register" style={{ textDecoration: 'none' }}><Button sx={{ color: 'info.main', textAlign: 'center', my: 3, boxShadow: 1, px: 5, py:3, borderRadius: 5 }}>NEW USER? PLEASE REGISTER</Button></NavLink>
+                    <NavLink to="/register" style={{ textDecoration: 'none' }}><Button sx={{ color: 'info.main', textAlign: 'center', my: 3, boxShadow: 1, px: 5, py: 3, borderRadius: 5 }}>NEW USER? PLEASE REGISTER</Button></NavLink>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <Button onClick={googleSignIn} sx={{ my: 3, boxShadow: 1, px: 10, py:3, borderRadius: 5 }} variant="text">Google Login</Button>
+                    <Button onClick={googleSignIn} sx={{ my: 3, boxShadow: 1, px: 10, py: 3, borderRadius: 5 }} variant="text">Google Login</Button>
                 </Grid>
                 <Grid item md={2} sx={{ pl: 0 }}>
 

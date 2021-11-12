@@ -1,4 +1,4 @@
-import { Button, TextField, Box, Alert } from '@mui/material';
+import { Button, TextField, Box, Alert, Typography, Container } from '@mui/material';
 import React, { useState } from 'react';
 
 const MakeAdmin = () => {
@@ -9,7 +9,7 @@ const MakeAdmin = () => {
     };
     const handleAdminSubmit = e => {
         const user = { email }
-        fetch('http://localhost:5000/users/admin', {
+        fetch('https://mighty-bastion-98054.herokuapp.com/users/admin', {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -21,7 +21,7 @@ const MakeAdmin = () => {
                 if (data.modifiedCount) {
                     setSuccess(true)
                 }
-                else{
+                else {
                     alert('This user does not exist, please add a valid users email. Thanks')
                     setEmail('')
                 }
@@ -29,22 +29,26 @@ const MakeAdmin = () => {
         e.preventDefault();
     };
     return (
-        <Box sx={{ mt: 10 }}>
-
+        <Container sx={{ mt: 10 }}>
+            <Box sx={{ borderRadius: 5, my: 3, boxShadow: 3 }}>
+                <Typography sx={{ color: 'info.main', py: 3 }} variant="h3" gutterBottom component="div">
+                    Make an Admin
+                </Typography>
+            </Box>
             <form onSubmit={handleAdminSubmit}>
                 <TextField
-                    sx={{ width: '50%' }}
+                    sx={{ width: '100%' }}
                     label="Email"
                     type="email"
                     onBlur={handleOnBlur}
                     variant="outlined" />
                 <br />
-                <Button sx={{ my: 3 }} type="submit" variant="contained">Make an Admin</Button>
+                <Button sx={{ my: 3, width: '100%' }} type="submit" variant="contained">Make an Admin</Button>
                 {
                     success && <Alert severity="success">Made an Admin successfully</Alert>
                 }
             </form>
-        </Box>
+        </Container>
     );
 };
 

@@ -9,7 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button } from '@mui/material';
+import { Button, Container, Typography, Box } from '@mui/material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -37,11 +37,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const ManageAllProducts = () => {
     const { products } = useProductCollection();
     const handleDeleteProduct = id => {
-        
+
         const proceed = window.confirm('Are sure? You want to delete?')
         if (proceed) {
 
-            const url = `http://localhost:5000/products/${id}`
+            const url = `https://mighty-bastion-98054.herokuapp.com/products/${id}`
             fetch(url, {
                 method: 'DELETE'
             })
@@ -58,9 +58,12 @@ const ManageAllProducts = () => {
 
 
     return (
-        <div>
-            <h2>Manage all Products: {products?.length} </h2>
-
+        <Container>
+            <Box sx={{ borderRadius: 5, my: 3, boxShadow: 3 }}>
+                <Typography sx={{ color: 'info.main', py: 3 }} variant="h3" gutterBottom component="div">
+                Manage all Products: {products?.length}
+                </Typography>
+            </Box>
             <TableContainer component={Paper}>
                 <Table aria-label="customized table">
                     <TableHead>
@@ -87,7 +90,7 @@ const ManageAllProducts = () => {
                 </Table>
             </TableContainer>
 
-        </div>
+        </Container>
     );
 };
 
