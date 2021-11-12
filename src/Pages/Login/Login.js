@@ -27,7 +27,9 @@ const Login = () => {
         handleGoogleSignIn(location, history);
     };
     return (
+
         <Container sx={{ p: 0 }}>
+            
             <Typography sx={{ color: 'text.secondary', mt: 5, mb: 3 }} variant="h6" gutterBottom component="div">LOGIN</Typography>
 
             <form
@@ -73,7 +75,7 @@ const Login = () => {
                     </Grid>
                 </Grid>
 
-                <Button sx={{ mt: 3 }} type="submit" variant="contained" >Login</Button>
+                <Button sx={{ mt: 3, width: '65%' }} type="submit" variant="contained" >Login</Button>
             </form>
 
             <Grid container>
@@ -85,11 +87,14 @@ const Login = () => {
                 </Grid>
                 <Grid item xs={12} md={4}>
                     <Button onClick={googleSignIn} sx={{ my: 3, boxShadow: 1, px: 10, py: 3, borderRadius: 5 }} variant="text">Google Login</Button>
+                    
                 </Grid>
                 <Grid item md={2} sx={{ pl: 0 }}>
 
                 </Grid>
+                
             </Grid>
+            
         </Container>
     );
 };

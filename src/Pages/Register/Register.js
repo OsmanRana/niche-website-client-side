@@ -89,7 +89,7 @@ const Register = () => {
                     </Grid>
 
                 </Grid>
-                <Button sx={{ mt: 3 }} type="submit" variant="contained" >Register</Button>
+                <Button sx={{ mt: 3, width: '65%' }} type="submit" variant="contained" >Register</Button>
             </form>
             <Grid container>
                 <Grid item md={2} sx={{ pl: 0 }}>
