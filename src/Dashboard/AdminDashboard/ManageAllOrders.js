@@ -36,13 +36,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const ManageAllOrders = () => {
 
-    const {orders} = useOrderCollection();
+    const { orders } = useOrderCollection();
     const handleDeleteOrder = id => {
 
         const proceed = window.confirm('Are sure? You want to delete?')
         if (proceed) {
 
-            const url = `http://localhost:5000/orders/${id}`
+            const url = `https://mighty-bastion-98054.herokuapp.com/orders/${id}`
             fetch(url, {
                 method: 'DELETE'
             })
@@ -55,23 +55,23 @@ const ManageAllOrders = () => {
                 });
         };
     };
-    const handleStatusUpdate = id =>{
-        const url = `http://localhost:5000/orders/${id}`
+    const handleStatusUpdate = id => {
+        const url = `https://mighty-bastion-98054.herokuapp.com/orders/${id}`
         fetch(url, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
-            body:JSON.stringify(orders)
+            body: JSON.stringify(orders)
         })
-        .then(res=> res.json())
-        .then(data=> {
-            if(data.modifiedCount> 0) {
-                alert('Order send for shipping')
-                window.location.reload();
-            }
-            console.log('update',data)
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    alert('Order send for shipping')
+                    window.location.reload();
+                }
+                console.log('update', data)
+            })
     }
 
 
@@ -79,7 +79,7 @@ const ManageAllOrders = () => {
         <Container>
             <Box sx={{ borderRadius: 5, my: 3, boxShadow: 3 }}>
                 <Typography sx={{ color: 'info.main', py: 3 }} variant="h3" gutterBottom component="div">
-                Manage all Orders: {orders?.length}
+                    Manage all Orders: {orders?.length}
                 </Typography>
             </Box>
             <TableContainer component={Paper}>

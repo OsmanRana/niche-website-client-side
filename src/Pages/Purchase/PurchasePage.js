@@ -24,24 +24,24 @@ const PurchasePage = () => {
     const { productName, description, image, price } = product;
     const { displayName, email } = user;
 
-//send order
+    //send order
     const onSubmit = data => {
         const status = 'Pending'
         data.orderStatus = status;
-        fetch ('http://localhost:5000/orders', {
+        fetch('https://mighty-bastion-98054.herokuapp.com/orders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(data)
         })
-        .then(res=>res.json())
-        .then(data=> {
-            if(data.insertedId){
-                alert('Order placed successfully')
-                history.push('/')
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    alert('Order placed successfully')
+                    history.push('/')
+                }
+            })
     };
 
 
