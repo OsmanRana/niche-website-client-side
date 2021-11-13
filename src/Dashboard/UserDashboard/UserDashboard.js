@@ -30,6 +30,7 @@ import MyOrders from './MyOrders';
 import Review from './Review';
 import Logout from './Logout';
 import DashboardHome from './DashboardHome';
+import UserRoute from '../../UserRoute/UserRoute';
 
 const drawerWidth = 240;
 
@@ -181,24 +182,22 @@ const UserDashboard = (props) => {
             >
                 <Toolbar />
                 <Switch>
-                    <Route exact path={path}>
+                    <UserRoute exact path={path}>
                         <DashboardHome></DashboardHome>
-                    </Route>
+                    </UserRoute>
                     {/* User routes */}
-                    <Route path={`${path}/pay`}>
+                    <UserRoute path={`${path}/pay`}>
                         <Pay></Pay>
-                    </Route>
-                    <Route path={`${path}/myOrders`}>
+                    </UserRoute>
+                    <UserRoute path={`${path}/myOrders`}>
                         <MyOrders></MyOrders>
-                    </Route>
-                    <Route path={`${path}/review`}>
+                    </UserRoute>
+                    <UserRoute path={`${path}/review`}>
                         <Review></Review>
-                    </Route>
-                    <Route path={`${path}/logout`}>
+                    </UserRoute>
+                    <UserRoute path={`${path}/logout`}>
                         <Logout></Logout>
-                    </Route>
-
-
+                    </UserRoute>
                 </Switch>
             </Box>
         </Box>
