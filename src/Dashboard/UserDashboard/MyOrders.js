@@ -61,9 +61,7 @@ const MyOrders = () => {
                     {user?.displayName}'s  Orders: {orders?.length}
                 </Typography>
             </Box>
-            {
-                !orders.length && <CircularProgress />
-            }
+
             <TableContainer component={Paper}>
                 <Table aria-label="customized table">
                     <TableHead>
