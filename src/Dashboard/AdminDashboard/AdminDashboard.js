@@ -31,6 +31,7 @@ import AddProduct from '../AdminDashboard/AddProduct';
 import ManageAllProducts from '../AdminDashboard/ManageAllProducts';
 import DashboardHome from '../UserDashboard/DashboardHome';
 import Logout from '../UserDashboard/Logout';
+import AdminRoute from '../../AdminRoute/AdminRoute';
 
 const drawerWidth = 240;
 
@@ -192,26 +193,26 @@ const UserDashboard = (props) => {
             >
                 <Toolbar />
                 <Switch>
-                    <Route exact path={path}>
+                    <AdminRoute exact path={path}>
                         <DashboardHome></DashboardHome>
-                    </Route>
+                    </AdminRoute>
 
                     {/* Admin Routes */}
-                    <Route path={`${path}/manageAllOrders`}>
+                    <AdminRoute path={`${path}/manageAllOrders`}>
                         <ManageAllOrders></ManageAllOrders>
-                    </Route>
-                    <Route path={`${path}/addProduct`}>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/addProduct`}>
                         <AddProduct></AddProduct>
-                    </Route>
-                    <Route path={`${path}/makeAdmin`}>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/makeAdmin`}>
                         <MakeAdmin></MakeAdmin>
-                    </Route>
-                    <Route path={`${path}/manageAllProducts`}>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/manageAllProducts`}>
                         <ManageAllProducts></ManageAllProducts>
-                    </Route>
-                    <Route path={`${path}/logout`}>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/logout`}>
                         <Logout></Logout>
-                    </Route>
+                    </AdminRoute>
                 </Switch>
             </Box>
         </Box>
