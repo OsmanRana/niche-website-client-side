@@ -26,4 +26,8 @@ Here an user can chek the status of the order, if want can cancel the order. Can
 
 Here an Admin can manage all orders, products. Can also make an admin.
 
+### `Technologies Used`
+
+React, firebase, react router, material ui for front end and  node, express, mongodb for back end
+
 Thank you very much!!!
