@@ -9,6 +9,7 @@ import Home from './Pages/Home/Home/Home';
 import Login from './Pages/Login/Login';
 import PurchasePage from './Pages/Purchase/PurchasePage';
 import Register from './Pages/Register/Register';
+import Footer from './Pages/Shared/Footer/Footer';
 import Navbar from './Pages/Shared/Navigation/Navbar';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 
@@ -47,7 +48,7 @@ function App() {
               <AdminDashboard></AdminDashboard>
             </Route>
           </Switch>
-          {/* <Footer></Footer> */}
+          <Footer></Footer>
         </Router>
       </AuthProvider>
     </div>

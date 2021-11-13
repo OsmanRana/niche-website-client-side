@@ -8,7 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button, Container, Typography, Box } from '@mui/material';
+import { Button, Container, Typography, Box, CircularProgress } from '@mui/material';
 import useOrderCollection from '../../hooks/useOrderCollection';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -82,6 +82,9 @@ const ManageAllOrders = () => {
                     Manage all Orders: {orders?.length}
                 </Typography>
             </Box>
+            {
+                !orders.length && <CircularProgress />
+            }
             <TableContainer component={Paper}>
                 <Table aria-label="customized table">
                     <TableHead>

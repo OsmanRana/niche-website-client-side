@@ -37,7 +37,7 @@ const drawerWidth = 240;
 const UserDashboard = (props) => {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const { user} = useAuth();
+    const { user } = useAuth();
 
     let { path, url } = useRouteMatch();
 
@@ -150,7 +150,7 @@ const UserDashboard = (props) => {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        {user?.displayName} ' s Dashboard
+                        Dashboard
                     </Typography>
                 </Toolbar>
             </AppBar>

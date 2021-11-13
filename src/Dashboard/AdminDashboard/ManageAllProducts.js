@@ -9,7 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button, Container, Typography, Box } from '@mui/material';
+import { Button, Container, Typography, Box, CircularProgress } from '@mui/material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -64,6 +64,9 @@ const ManageAllProducts = () => {
                 Manage all Products: {products?.length}
                 </Typography>
             </Box>
+            {
+                !products.length && <CircularProgress />
+            }
             <TableContainer component={Paper}>
                 <Table aria-label="customized table">
                     <TableHead>

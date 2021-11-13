@@ -47,7 +47,6 @@ const PurchasePage = () => {
 
     return (
         <>
-            <Navigation></Navigation>
             {
                 !product._id && <CircularProgress />
             }

@@ -1,4 +1,4 @@
-import { Container, Box, Typography, TableContainer, Paper, Table, TableHead, TableRow, TableBody, Button } from '@mui/material';
+import { Container, Box, Typography, TableContainer, Paper, Table, TableHead, TableRow, TableBody, Button, CircularProgress } from '@mui/material';
 
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
@@ -61,6 +61,9 @@ const MyOrders = () => {
                     {user?.displayName}'s  Orders: {orders?.length}
                 </Typography>
             </Box>
+            {
+                !orders.length && <CircularProgress />
+            }
             <TableContainer component={Paper}>
                 <Table aria-label="customized table">
                     <TableHead>

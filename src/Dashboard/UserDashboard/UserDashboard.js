@@ -139,7 +139,7 @@ const UserDashboard = (props) => {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        {user?.displayName} ' s Dashboard
+                        Dashboard
                     </Typography>
                 </Toolbar>
             </AppBar>
