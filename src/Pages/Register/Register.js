@@ -1,4 +1,4 @@
-import { Alert, Button, CircularProgress, Container, Grid, Typography } from '@mui/material';
+import { Alert, Button, CircularProgress, Container, Grid, Typography, Box } from '@mui/material';
 import React, { useState } from 'react';
 import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
@@ -29,7 +29,8 @@ const Register = () => {
     };
     return (
         <Container sx={{ p: 0 }}>
-            <Typography sx={{ color: 'text.secondary', mt: 5, mb: 3 }} variant="h6" gutterBottom component="div">REGISTER</Typography>
+            <i style={{fontSize: '30px', marginTop: '15px', color: 'orange'}} className="fas fa-user"></i>
+            <Typography sx={{ color: 'info.main', mt: 0, mb: 3 }} variant="h6" gutterBottom component="div">REGISTER</Typography>
             <form
                 onSubmit={handleRegisterSubmit}
             >
@@ -96,10 +97,10 @@ const Register = () => {
 
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <NavLink to="/login" style={{ textDecoration: 'none' }}><Button sx={{ color: 'info.main', textAlign: 'center', my: 3, boxShadow: 1, px: 5, py: 3, borderRadius: 5 }} >ALREADY REGISTERED? PLEASE LOGIN</Button></NavLink>
+                    <NavLink to="/login" style={{ textDecoration: 'none' }}><Button sx={{ color: 'info.main', textAlign: 'center', my: 3, boxShadow: 1, px: 5, py: 4, borderRadius: 5 }} ><i style={{fontSize: '30px', marginRight: '10px', color: 'orange'}} className="fas fa-sign-in-alt"></i>ALREADY REGISTERED? PLEASE LOGIN</Button></NavLink>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <Button onClick={googleSignIn} sx={{ my: 3, boxShadow: 1, px: 10, py: 3, borderRadius: 5 }} variant="text">Google Login</Button>
+                    <Button onClick={googleSignIn} sx={{ my: 3, boxShadow: 1, px: 10, py: 2.5, borderRadius: 5 }} variant="text"><img src='/google.png' alt=""/>Google Login</Button>
                 </Grid>
                 <Grid item md={2} sx={{ pl: 0 }}>
 

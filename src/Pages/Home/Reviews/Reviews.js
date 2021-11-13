@@ -1,4 +1,4 @@
-import { CircularProgress, Container, Grid } from '@mui/material';
+import { CircularProgress, Container, Grid, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import ReviewDetails from './ReviewDetails';
 
@@ -10,11 +10,16 @@ const Reviews = () => {
             .then(data => seRviews(data))
     }, [])
     return (
+        
         <Container>
+            <img style={{width:'100%', marginTop: '30px'}} src='/review-banner.jpg' alt=""/>
+            <Typography sx={{ color: 'info.main', fontWeight: 'light', mt: -23, mb: 20, display: { xs: 'none', sm: 'block' }  }} variant="h2">CUSTOMER TESTIMONY </Typography>
+            <Typography sx={{ color: 'info.main', fontWeight: 'light', my: 5, display: { xs: 'block', sm: 'none' }  }} variant="h2">CUSTOMER TESTIMONY </Typography>
             {
                 !reviews.length && <CircularProgress />
             }
-            <Grid container spacing={2}>
+            <hr/>
+            <Grid sx={{my:3}} container spacing={2}>
 
                 {
                     reviews?.map(review => <ReviewDetails

@@ -29,8 +29,8 @@ const Login = () => {
     return (
 
         <Container sx={{ p: 0 }}>
-            
-            <Typography sx={{ color: 'text.secondary', mt: 5, mb: 3 }} variant="h6" gutterBottom component="div">LOGIN</Typography>
+            <i style={{fontSize: '30px', marginTop: '15px', color: 'orange'}} className="fas fa-user"></i>
+            <Typography sx={{ color: 'info.main', mb: 3 }} variant="h6" gutterBottom component="div">LOGIN</Typography>
 
             <form
                 onSubmit={handleLoginSubmit}
@@ -83,10 +83,10 @@ const Login = () => {
 
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <NavLink to="/register" style={{ textDecoration: 'none' }}><Button sx={{ color: 'info.main', textAlign: 'center', my: 3, boxShadow: 1, px: 5, py: 3, borderRadius: 5 }}>NEW USER? PLEASE REGISTER</Button></NavLink>
+                    <NavLink to="/register" style={{ textDecoration: 'none' }}><Button sx={{ color: 'info.main', textAlign: 'center', my: 3, boxShadow: 1, px: 5, py: 4, borderRadius: 5 }}><i style={{fontSize: '25px', marginRight: '10px', color: 'orange'}} className="fas fa-user-plus"></i>NEW USER? PLEASE REGISTER</Button></NavLink>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <Button onClick={googleSignIn} sx={{ my: 3, boxShadow: 1, px: 10, py: 3, borderRadius: 5 }} variant="text">Google Login</Button>
+                    <Button onClick={googleSignIn} sx={{ my: 3, boxShadow: 1, px: 10, py: 2, borderRadius: 5 }} variant="text"><img src='/google.png' alt=""/>Google Login</Button>
                     
                 </Grid>
                 <Grid item md={2} sx={{ pl: 0 }}>

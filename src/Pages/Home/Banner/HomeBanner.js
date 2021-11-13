@@ -3,7 +3,7 @@ import React from 'react';
 const HomeBanner = () => {
     return (
         <div>
-            <h2>This is home banner</h2>
+            <img style={{width: '100%'}} src='/banner.jpg' alt=""/>
         </div>
     );
 };
